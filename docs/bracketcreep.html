@@ -1,0 +1,971 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bracket creep &#8212; My Jupyter Book</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+    
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/bracketcreep.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/bracketcreep.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#median-net-income">
+   Median net income
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#income-from-net-income">
+     Income from net income
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tax-paid">
+     Tax paid
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bracket-creep-for-net-income">
+   Bracket creep for net income
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bracket-creep-on-the-margin">
+   Bracket creep on the margin
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#in-the-first-bracket">
+       In the first bracket
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#in-the-last-bracket">
+       In the last bracket
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#marginal-value">
+   Marginal value
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-x-th-dollar">
+     The
+     <span class="math notranslate nohighlight">
+      \(x\)
+     </span>
+     -th dollar
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-average-return">
+     The average return
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plots">
+   Plots
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     The average return
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-on-average-and-marginal-values">
+   More on average and marginal values
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#premium-on-the-marginal-dollar">
+     Premium on the marginal dollar
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-of-the-premium">
+     Plot of the premium
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#further-remarks">
+     Further remarks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#toward-applications">
+   Toward applications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-basis-criteria">
+     Decision basis criteria
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#effort-components">
+     Effort components
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Bracket creep</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#median-net-income">
+   Median net income
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#income-from-net-income">
+     Income from net income
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tax-paid">
+     Tax paid
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bracket-creep-for-net-income">
+   Bracket creep for net income
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bracket-creep-on-the-margin">
+   Bracket creep on the margin
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#in-the-first-bracket">
+       In the first bracket
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#in-the-last-bracket">
+       In the last bracket
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#marginal-value">
+   Marginal value
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-x-th-dollar">
+     The
+     <span class="math notranslate nohighlight">
+      \(x\)
+     </span>
+     -th dollar
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-average-return">
+     The average return
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plots">
+   Plots
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     The average return
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-on-average-and-marginal-values">
+   More on average and marginal values
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#premium-on-the-marginal-dollar">
+     Premium on the marginal dollar
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-of-the-premium">
+     Plot of the premium
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#further-remarks">
+     Further remarks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#toward-applications">
+   Toward applications
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-basis-criteria">
+     Decision basis criteria
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#effort-components">
+     Effort components
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="bracket-creep">
+<h1>Bracket creep<a class="headerlink" href="#bracket-creep" title="Permalink to this headline">¶</a></h1>
+<p>Income tax in Australia is progressive. This means every extra dollar earned over a given threshhold is subject to a higher rate of tax. This leads to the following string of reasoning: getting a pay rise <em>means</em> getting placed in a higher tax bracket <em>means</em> paying more tax <em>means</em> receiving less income (less taxes) had they foregone the pay rise. This reasoning, compelling at a glance, leads to many people to forgo a pay rise.</p>
+<p>This is but one feature of the notion of <em>bracket creep</em>. Read about it in words of the Australian Goverment <a class="reference external" href="https://www.aph.gov.au/About_Parliament/Parliamentary_Departments/Parliamentary_Budget_Office/Publications/Budget_explainers/Bracket_creep#:~:text=Bracket%20creep%20is%20a%20term,number%20of%20tax%20%27brackets%27">here</a>.</p>
+<p>Now, these people are correct of course in their first impressions: that being placed in a higher tax bracket means they will pay more in tax. Their mistake lies in fixating on only one half of the equation. The higher income they receive offsets any extra tax they would pay. This can be demonstrated empirically.</p>
+<p>There is a slightly more nuanced sense however in which people are correct in <em>all</em> of their assertions. But to understand this involves understanding income earned <em>at the margins</em>. Knowing that tax is progressive, each extra dollar earned is worth less <em>on average</em> than each dollar earned earlier. Hence it is reasonable to ask:</p>
+<p><em>is it worth expending the same effort in earning previous dollars to earn this extra dollar?</em></p>
+<p>We firstly look at the net income earned, which is income less taxes, and show how being placed in higher brackets does <em>not</em> imply taing home less <em>net</em> income. Subsequently, we will see how the average return on each dollar nevertheless decreases with every dollar earned, thus begging the above question.</p>
+<div class="section" id="median-net-income">
+<h2>Median net income<a class="headerlink" href="#median-net-income" title="Permalink to this headline">¶</a></h2>
+<p>In the <code class="docutils literal notranslate"><span class="pre">tax</span></code> module one finds the method <code class="docutils literal notranslate"><span class="pre">netIncome</span></code> which passes in an income and returns <em>net</em> income, being the income less taxes. A person’s <em>net</em> income is their cash in the bank. It is the money they can use to spend on whatever they want. The rates of tax on income in Australia can be found <a class="reference external" href="https://www.ato.gov.au/rates/individual-income-tax-rates/">here</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tax</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the <a class="reference external" href="https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions/personal-income-australia/2014-15-2018-19">Australian Bureau of Statistics</a> the median income for employed Australians during the year 2018-2019 was <code class="docutils literal notranslate"><span class="pre">51</span> <span class="pre">389</span></code>. Their median <em>net income</em> was:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">round</span><span class="p">(</span><span class="n">tax</span><span class="o">.</span><span class="n">netIncome</span><span class="p">(</span><span class="mi">51389</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44220.57
+</pre></div>
+</div>
+</div>
+</div>
+<p>And so <code class="docutils literal notranslate"><span class="pre">44</span> <span class="pre">220.57</span></code> is the number of Australian dollars that the median income earner in Australia pocketed during the year 2018-2019.</p>
+<div class="section" id="income-from-net-income">
+<h3>Income from net income<a class="headerlink" href="#income-from-net-income" title="Permalink to this headline">¶</a></h3>
+<p>In reverse, suppose we know the <em>net</em> income <code class="docutils literal notranslate"><span class="pre">net</span></code>. Is it then possible to calculate what the income, <code class="docutils literal notranslate"><span class="pre">income</span></code>, was such that <code class="docutils literal notranslate"><span class="pre">netIncome(income)</span></code> is the given <em>net</em> income <code class="docutils literal notranslate"><span class="pre">net</span></code>? That is, is it possible to invert the function <code class="docutils literal notranslate"><span class="pre">netIncome</span></code>?</p>
+<p>The difference between income and <em>net</em> income is of course the tax paid. If it is possible to calculate income from <em>net</em> income, thereby inverting <code class="docutils literal notranslate"><span class="pre">netIncome</span></code>, it will be possible to calculate the tax paid.</p>
+<p>The method <code class="docutils literal notranslate"><span class="pre">netIncomeInverse</span></code> in the <code class="docutils literal notranslate"><span class="pre">tax</span></code> module is the desired inverse. Suppose instead that the quoted figure <code class="docutils literal notranslate"><span class="pre">51</span> <span class="pre">389</span></code> above is actually the <em>net</em> median income. What was the median income then? Calling <code class="docutils literal notranslate"><span class="pre">netIncomeInverse</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">round</span><span class="p">(</span><span class="n">tax</span><span class="o">.</span><span class="n">netIncomeInverse</span><span class="p">(</span><span class="mi">51389</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62008.89
+</pre></div>
+</div>
+</div>
+</div>
+<p>And so, were the median income earner to <em>pocket</em> <code class="docutils literal notranslate"><span class="pre">51</span> <span class="pre">389</span></code> Australian dollars, they would have to have earned an income of <code class="docutils literal notranslate"><span class="pre">62</span> <span class="pre">008.89</span></code>.</p>
+<p><strong>Note.</strong> To see that <code class="docutils literal notranslate"><span class="pre">netIncomeInverse</span></code> really is an inverse, it would have to satisfy <code class="docutils literal notranslate"><span class="pre">netIncomeInverse(netIncome(x))</span> <span class="pre">=</span> <span class="pre">x</span></code> for any income <code class="docutils literal notranslate"><span class="pre">x</span></code>. This can be proved by directly inspecting the calculation used in the method <code class="docutils literal notranslate"><span class="pre">netIncomeInverse</span></code>. The following code cell gives a demonstration for some sample incomes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_incomes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">100</span><span class="p">,</span> <span class="mi">18000</span><span class="p">,</span> <span class="mi">37000</span><span class="p">,</span> <span class="mi">66000</span><span class="p">,</span> <span class="mi">130000</span><span class="p">,</span> <span class="mi">200000</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">income</span> <span class="ow">in</span> <span class="n">sample_incomes</span><span class="p">:</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">tax</span><span class="o">.</span><span class="n">netIncome</span><span class="p">(</span><span class="n">income</span><span class="p">)</span>
+    <span class="n">inverse</span> <span class="o">=</span> <span class="n">tax</span><span class="o">.</span><span class="n">netIncomeInverse</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;the net income is </span><span class="si">{</span><span class="n">net</span><span class="si">}</span><span class="s2">. The (gross) income, or inverse, is </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">inverse</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the net income is 100. The (gross) income, or inverse, is 100.
+the net income is 18000. The (gross) income, or inverse, is 18000.
+the net income is 33428.0. The (gross) income, or inverse, is 37000.0.
+the net income is 54083.0. The (gross) income, or inverse, is 66000.0.
+the net income is 96833.0. The (gross) income, or inverse, is 130000.0.
+the net income is 139333.0. The (gross) income, or inverse, is 200000.0.
+the net income is 579333.0. The (gross) income, or inverse, is 1000000.0.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tax-paid">
+<h3>Tax paid<a class="headerlink" href="#tax-paid" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned earlier, an important feature of having the inverse <code class="docutils literal notranslate"><span class="pre">netIncomeInverse</span></code> is the ability to calculate the tax paid given a <em>net</em> income. The <code class="docutils literal notranslate"><span class="pre">taxPaid</span></code> method in the <code class="docutils literal notranslate"><span class="pre">tax</span></code> module can be called on any  income, net or gross, to return the tax paid.</p>
+<p>On the median Australian income of <code class="docutils literal notranslate"><span class="pre">51</span> <span class="pre">389</span></code> we have:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tax</span><span class="o">.</span><span class="n">taxPaidNet</span><span class="p">(</span><span class="mi">51389</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10619.89
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tax</span><span class="o">.</span><span class="n">taxPaidGross</span><span class="p">(</span><span class="mi">51389</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7168.43
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the first instance, the median income <code class="docutils literal notranslate"><span class="pre">51</span> <span class="pre">389</span></code> is the <em>net</em> income. The tax paid by the median income earner is <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">619.89</span></code>.</p>
+<p>In the second instance, the median income is <code class="docutils literal notranslate"><span class="pre">51</span> <span class="pre">389</span></code> <em>gross</em> income. The tax paid by the median income earner in this case is less. It is <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">168.43</span></code>.</p>
+</div>
+</div>
+<div class="section" id="bracket-creep-for-net-income">
+<h2>Bracket creep for net income<a class="headerlink" href="#bracket-creep-for-net-income" title="Permalink to this headline">¶</a></h2>
+<p>In Australia there are <em>five</em> tax brackets. Within each tax bracket, the tax rate is a fixed percentage. To see that getting placed in a higher tax bracket does <em>not</em> lead to less net income, it suffices to look at incomes on either side of the each tax bracket and calculate the net income with <code class="docutils literal notranslate"><span class="pre">netIncome</span></code>.</p>
+<p>That is, we need to look at four pairs of incomes. With the instance <code class="docutils literal notranslate"><span class="pre">tax_brackets</span></code> from the <code class="docutils literal notranslate"><span class="pre">tax</span></code> module, these income pairs are:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> versus </span><span class="si">{</span><span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18200 versus 18201
+45000 versus 45001
+120000 versus 120001
+180000 versus 180001
+</pre></div>
+</div>
+</div>
+</div>
+<p>And so, if you were on an income on the <em>left</em> of the above two columns of numbers, a pay rise of a single dollar would place you in a higher tax bracket. This means you pay more in tax. But does it mean you end up pocketing less money overall?</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">netIncome</span></code>, the above incomes result in the following net incomes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tax</span><span class="o">.</span><span class="n">netIncome</span><span class="p">(</span><span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">}</span><span class="s2"> versus </span><span class="si">{</span><span class="n">tax</span><span class="o">.</span><span class="n">netIncome</span><span class="p">(</span><span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18200 versus 18200.81
+39908.0 versus 39908.68
+90533.0 versus 90533.63
+128333.0 versus 128333.55
+</pre></div>
+</div>
+</div>
+</div>
+<p>The numbers on the right are larger than their partner numbers on the left. Indeed, taking the difference <code class="docutils literal notranslate"><span class="pre">right</span> <span class="pre">-</span> <span class="pre">left</span></code> gives:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">tax</span><span class="o">.</span><span class="n">netIncome</span><span class="p">(</span><span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">tax</span><span class="o">.</span><span class="n">netIncome</span><span class="p">(</span><span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.81
+0.68
+0.63
+0.55
+</pre></div>
+</div>
+</div>
+</div>
+<p>All the numbers above are greater than zero (in fact, they are the complements of the tax rates for the respective tax bracket, i.e., the <em>marginal</em> tax rates). Hence, being placed in a higher tax bracker does <em>not</em> imply less income overall.</p>
+<p>Indeed, unsurprisingly, it results in <em>more</em> net income overall.</p>
+</div>
+<div class="section" id="bracket-creep-on-the-margin">
+<h2>Bracket creep on the margin<a class="headerlink" href="#bracket-creep-on-the-margin" title="Permalink to this headline">¶</a></h2>
+<p>A more interesting question is now:</p>
+<p><em>is it worth putting in the <strong>effort</strong> to earn an extra dollar of income if it places you in a higher tax bracket?</em></p>
+<p>The motivation behind asking this question lies in the observation: getting placed in a higher bracket leads to less return on effort expended in earning the next dollar compared to that expended on earning the previous dollars.</p>
+<p>This can be highlighted through in the following example.</p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="in-the-first-bracket">
+<h4>In the first bracket<a class="headerlink" href="#in-the-first-bracket" title="Permalink to this headline">¶</a></h4>
+<p>On an income of <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code>, each dollar earned less than <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code> carried no tax. That is, each dollar less than <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code> is worth <code class="docutils literal notranslate"><span class="pre">1</span></code> <em>net</em> dollars. The effort in earning one more dollar however puts you in the tax bracket carrying <code class="docutils literal notranslate"><span class="pre">0.19</span></code> tax. That is, the dollar sending <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code> to <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">201</span></code> is worth <code class="docutils literal notranslate"><span class="pre">0.81</span></code> <em>net</em> dollars. This dollar is worth less than any of the previous <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code> dollars.</p>
+<p><em>Is earning it worth the same effort?</em></p>
+<p>This question might seem silly in this tax bracket. The exigencies of the economy may be motivation enough to earn the <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code>-th dollar. It becomes more interesting at higher tax brackets however.</p>
+</div>
+<div class="section" id="in-the-last-bracket">
+<h4>In the last bracket<a class="headerlink" href="#in-the-last-bracket" title="Permalink to this headline">¶</a></h4>
+<p>On an income of <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code>, the <em>average tax rate</em> is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">round</span><span class="p">(</span><span class="n">tax</span><span class="o">.</span><span class="n">netIncome</span><span class="p">(</span><span class="mi">180000</span><span class="p">)</span><span class="o">/</span><span class="mi">180000</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.71
+</pre></div>
+</div>
+</div>
+</div>
+<p>Hence, the return on every dollar earned under <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code> is, on average, <code class="docutils literal notranslate"><span class="pre">0.71</span></code> <em>net</em> dollars.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is imperative to use “average rates” since the rate of tax is not constant. It is progressive and so changes as we progress through the tax brackets.</p>
+</div>
+<p>The extra dollar sending <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code> to <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">001</span></code> carries a tax of <code class="docutils literal notranslate"><span class="pre">0.45</span></code>. Hence, it is only worth <code class="docutils literal notranslate"><span class="pre">0.55</span></code> <em>net</em> dollars. Much less than the average.</p>
+<p><em>Is it worth putting in the same effort to earn the <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code>-th dollar?</em></p>
+<p>Now to add a bit more context to this question, note that <code class="docutils literal notranslate"><span class="pre">0.71</span></code> is greater than the <em>net</em> value of each dollar in the tax bracket <code class="docutils literal notranslate"><span class="pre">120</span> <span class="pre">000</span></code> to <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code>. From the tax rates in the instance <code class="docutils literal notranslate"><span class="pre">tax_rates</span></code>, each dollar in this bracket carries a tax of <code class="docutils literal notranslate"><span class="pre">0.37</span></code>. This means its value is <code class="docutils literal notranslate"><span class="pre">0.63</span></code> <em>net</em> dollars. Compared to the average of <code class="docutils literal notranslate"><span class="pre">0.71</span></code>, <code class="docutils literal notranslate"><span class="pre">0.63</span></code> is as a percentage:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">percentage</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="mf">0.63</span><span class="o">/</span><span class="mf">0.71</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">percentage</span><span class="si">}</span><span class="s2"> percent of </span><span class="si">{</span><span class="mf">0.71</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88.73 percent of 0.71
+</pre></div>
+</div>
+</div>
+</div>
+<p>What does this mean? Firstly that the <code class="docutils literal notranslate"><span class="pre">179</span> <span class="pre">999</span></code>-th dollar is worth <code class="docutils literal notranslate"><span class="pre">88.73</span></code> percent of the <em>average dollar</em> under <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code>. That is, each extra dollar earned is losing value.</p>
+<p>The <em>premium</em> on earning the <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code>-th dollar is <code class="docutils literal notranslate"><span class="pre">11.27</span></code> percent. That is, in order to earn this dollar, one is willing earn it at an <code class="docutils literal notranslate"><span class="pre">11.27</span></code> percent <em>loss</em> in average value. Similarly, concerning the <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code>-th dollar, this is earned at an even greater loss. As it is worth <code class="docutils literal notranslate"><span class="pre">0.55</span></code> <em>net</em> dollars we find as a percentage of the average:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">percentage</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="mf">0.55</span><span class="o">/</span><span class="mf">0.71</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">percentage</span><span class="si">}</span><span class="s2"> percent of </span><span class="si">{</span><span class="mf">0.71</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77.46 percent of 0.71
+</pre></div>
+</div>
+</div>
+</div>
+<p>The premium on the <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">001</span></code>-th is thus <code class="docutils literal notranslate"><span class="pre">22.54</span></code> percent. Compared to the <code class="docutils literal notranslate"><span class="pre">179</span> <span class="pre">999</span></code>-th dollar, the premium has increased by:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">premium</span> <span class="o">=</span> <span class="mf">22.54</span><span class="o">/</span><span class="mf">11.27</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">premium</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">premium</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">premium</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> percent.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100.0 percent.
+</pre></div>
+</div>
+</div>
+</div>
+<p>That is, the premium on earning the <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code>-th dollar has doubled compared to earning the <code class="docutils literal notranslate"><span class="pre">179</span> <span class="pre">999</span></code>-th dollar. This is directly due to having progressed to a new tax bracket. And so it is worth asking more earnestly:</p>
+<p><em>is this increase in premium worth putting in the effort to earn the <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code>-th dollar?</em></p>
+<p>This question and the preceeding calculations are precursors to the notion of marginal utility in classical economics.</p>
+</div>
+</div>
+</div>
+<div class="section" id="marginal-value">
+<h2>Marginal value<a class="headerlink" href="#marginal-value" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-x-th-dollar">
+<h3>The <span class="math notranslate nohighlight">\(x\)</span>-th dollar<a class="headerlink" href="#the-x-th-dollar" title="Permalink to this headline">¶</a></h3>
+<p>We begin with establishing the following notion of “the <span class="math notranslate nohighlight">\(x\)</span>-th dollar”.</p>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition.</p>
+<p><em>The dollar sending <span class="math notranslate nohighlight">\(x \mapsto x + 1\)</span> will be referred to as the <strong><span class="math notranslate nohighlight">\(x\)</span>-th dollar</strong>.</em></p>
+</div>
+<p>The <span class="math notranslate nohighlight">\(x\)</span>-th dollar is worth <code class="docutils literal notranslate"><span class="pre">(1</span> <span class="pre">-</span> <span class="pre">tax_rate)</span></code>-many <em>net</em> dollars. That is, depending on the tax bracket in which the income <span class="math notranslate nohighlight">\(x\)</span> falls, that’s the rate of tax carried by the <span class="math notranslate nohighlight">\(x\)</span>-th dollar.</p>
+<p>Traditionally, the <em>marginal value</em> is the value of an additional unit of output. In the present case, the marginal value of the <span class="math notranslate nohighlight">\(x\)</span>-th dollar is precisely <code class="docutils literal notranslate"><span class="pre">(1</span> <span class="pre">-</span> <span class="pre">tax_rate)</span></code>. The following code passes in an income <span class="math notranslate nohighlight">\(x\)</span> and returns the <em>marginal value</em> of the <span class="math notranslate nohighlight">\(x\)</span>-th dollar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">marginalValue</span><span class="p">(</span><span class="n">income</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">income</span> <span class="o">&lt;=</span> <span class="n">tax</span><span class="o">.</span><span class="n">tax_brackets</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="o">-</span><span class="n">tax</span><span class="o">.</span><span class="n">tax_rates</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-average-return">
+<h3>The average return<a class="headerlink" href="#the-average-return" title="Permalink to this headline">¶</a></h3>
+<p>As with marginal value, at a given level of income we can also form the <em>average return</em>. On an income <span class="math notranslate nohighlight">\(x\)</span>, the <em>average return</em> for each dollar earned less than <span class="math notranslate nohighlight">\(x\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\mbox{aveReturn}(x) = \frac{\mbox{netIncome$(x)$}}{x}.
+\end{align}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">aveReturn</span><span class="p">(</span><span class="n">income</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tax</span><span class="o">.</span><span class="n">netIncome</span><span class="p">(</span><span class="n">income</span><span class="p">)</span><span class="o">/</span><span class="n">income</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the investopedia article <a class="reference external" href="https://www.investopedia.com/terms/m/marginaltaxrate.asp">here</a>, what we have called the average is referred to as the <em>effective</em> tax rate.</p>
+</div>
+</div>
+</div>
+<div class="section" id="plots">
+<h2>Plots<a class="headerlink" href="#plots" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>The average return<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>As suggested above, the average return on each dollar decreases with each dollar earned. In the following plot, the <span class="math notranslate nohighlight">\(x\)</span>-axis parametrises income. The <span class="math notranslate nohighlight">\(y\)</span>-axis the average return on a dollar of income.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="n">incomes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">300001</span><span class="p">)]</span>
+<span class="n">average_returns</span> <span class="o">=</span> <span class="p">[</span><span class="n">aveReturn</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">300001</span><span class="p">)]</span>
+<span class="n">marginal_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">marginalValue</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">300001</span><span class="p">)]</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average and marginal value&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Dollars earned&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Dollar value&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">incomes</span><span class="p">,</span> <span class="n">average_returns</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Average return on the dollar&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">incomes</span><span class="p">,</span> <span class="n">marginal_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Marginal value&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bracketcreep_36_0.png" src="_images/bracketcreep_36_0.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The marginal value curve is consistently less than the average value. This is to be expected since the average is falling. If the average were rising, then marginal value should be greater than average value. The two values coincide when the average value is constant, as can be seen for incomes in the first tax bracket, i.e., in the range <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code>.</p>
+</div>
+<p>Since the marginal tax rate is constant for all incomes <span class="math notranslate nohighlight">\(x\)</span> greater than <code class="docutils literal notranslate"><span class="pre">180</span> <span class="pre">000</span></code>, the average value curve will asymptote to this line. In other words, the dollar at infinity will be worth <code class="docutils literal notranslate"><span class="pre">0.55</span></code> <em>net</em> dollars. In particular, the Australian dollar will <em>always</em> be worth more than <code class="docutils literal notranslate"><span class="pre">0.55</span></code> <em>net</em> dollars. The marginal value of an Australian dollar will never be worth more than the average however.</p>
+</div>
+</div>
+<div class="section" id="more-on-average-and-marginal-values">
+<h2>More on average and marginal values<a class="headerlink" href="#more-on-average-and-marginal-values" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="premium-on-the-marginal-dollar">
+<h3>Premium on the marginal dollar<a class="headerlink" href="#premium-on-the-marginal-dollar" title="Permalink to this headline">¶</a></h3>
+<p>We have seen that the marginal value of an Australian dollar will always be less than the average. What is the <em>magnitude</em> of this difference? In inspecting the magnitude we will be able to clearly see the impact of  progressive taxation.</p>
+<p>At an income level <span class="math notranslate nohighlight">\(x\)</span>, let <span class="math notranslate nohighlight">\(\mathfrak m_x\)</span> denote the marginal value of the <span class="math notranslate nohighlight">\(x\)</span>-th dollar and <span class="math notranslate nohighlight">\(\alpha_x\)</span> the average <em>net</em> value value of every dollar less than <span class="math notranslate nohighlight">\(x\)</span>. We have demonstrated that <span class="math notranslate nohighlight">\(\mathfrak m_x \leq \alpha_x\)</span> for all <span class="math notranslate nohighlight">\(x\)</span>, with equality if and only if <span class="math notranslate nohighlight">\(0\leq x\leq 18~200\)</span>, i.e., if the income <span class="math notranslate nohighlight">\(x\)</span> falls in the first tax bracket.</p>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em>premium</em> on <span class="math notranslate nohighlight">\(x\)</span>-th dollar, denoted <span class="math notranslate nohighlight">\(|x|\)</span>, is the percentage difference between <span class="math notranslate nohighlight">\(\mathfrak m_x\)</span> and <span class="math notranslate nohighlight">\(\alpha_x\)</span> as a percentage of <span class="math notranslate nohighlight">\(\alpha_x\)</span>.</p>
+</div>
+<p>The premium is calculated as</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\frac{|x|}{100}
+=
+\frac{\alpha_x - \mathfrak m_x}{\alpha_x}
+\end{align}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since <span class="math notranslate nohighlight">\(\mathfrak m_x \leq \alpha_x\)</span>, the premium <span class="math notranslate nohighlight">\(|x|\)</span> will always be positive. If it is negative, then the marginal value is higher than the average value. If the premium were negative, we might instead refer to it as a “discount”.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">premium</span><span class="p">(</span><span class="n">income</span><span class="p">):</span>
+    <span class="n">average</span> <span class="o">=</span> <span class="n">aveReturn</span><span class="p">(</span><span class="n">income</span><span class="p">)</span>
+    <span class="n">marginal</span> <span class="o">=</span> <span class="n">marginalValue</span><span class="p">(</span><span class="n">income</span><span class="p">)</span>
+    <span class="n">percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">average</span> <span class="o">-</span> <span class="n">marginal</span><span class="p">)</span><span class="o">/</span><span class="n">average</span>
+    <span class="n">percentage</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">percentage</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">percentage</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plot-of-the-premium">
+<h3>Plot of the premium<a class="headerlink" href="#plot-of-the-premium" title="Permalink to this headline">¶</a></h3>
+<p>From the earlier plot, see that as <span class="math notranslate nohighlight">\(x\)</span> approaches a new tax bracket the values <span class="math notranslate nohighlight">\(\alpha_x\)</span> and <span class="math notranslate nohighlight">\(\mathfrak m_x\)</span> come closer. Then on progession through to a new tax bracket they suddenly jump apart, as though repelled by a new force in physics (c.f., the strong nuclear force).</p>
+<p>This can be seen directly in the following plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">incomes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">300001</span><span class="p">)]</span>
+<span class="n">premiums</span> <span class="o">=</span> <span class="p">[</span><span class="n">premium</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">300001</span><span class="p">)]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">incomes</span><span class="p">,</span> <span class="n">premiums</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Premium to income&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Premium&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Dollars earned&quot;</span><span class="p">)</span>
+
+<span class="c1"># plt.legend()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bracketcreep_41_0.png" src="_images/bracketcreep_41_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="further-remarks">
+<h3>Further remarks<a class="headerlink" href="#further-remarks" title="Permalink to this headline">¶</a></h3>
+<p>The above plot reveals the following. Along the <span class="math notranslate nohighlight">\(x\)</span>-axis we find income while the <span class="math notranslate nohighlight">\(y\)</span>-axis records the premium of the marginal dollar earned. It addresses the question:</p>
+<p><em>at what premium does the marginal dollar trade relative to the average?</em></p>
+<p>The tax-free threshhold is at the income level of <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code>. That is, there is no tax paid on income less than <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code>. Accordingly, there is no premium on the marginal dollar. This changes immediately for the <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code>-th dollar. The premium on this dollar is <code class="docutils literal notranslate"><span class="pre">0.19</span></code>, or <code class="docutils literal notranslate"><span class="pre">19</span></code> percent. Since the marginal value is constant within tax brackets, the premium rapidly decreases until it hits the next threshhold.</p>
+<p>An interesting point to observe is that, with each threshhold passed, the premium increases “on average” for incomes under <code class="docutils literal notranslate"><span class="pre">300</span> <span class="pre">000</span></code>. Any marginal dollar less than <code class="docutils literal notranslate"><span class="pre">18</span> <span class="pre">200</span></code> carries the lowest premium, being <em>zero</em>. The marginal dollar carrying the highest premium is the <code class="docutils literal notranslate"><span class="pre">45</span> <span class="pre">000</span></code>-th dollar. It carries a premium of:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">premium</span><span class="p">(</span><span class="mi">45001</span><span class="p">)</span><span class="si">}</span><span class="s2"> percent.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.89 percent.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Where the median income earner is concerned, recall that they earn <code class="docutils literal notranslate"><span class="pre">51</span> <span class="pre">389</span></code>. Their premium on earning the <code class="docutils literal notranslate"><span class="pre">51</span> <span class="pre">389</span></code>-th dollar is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">premium</span><span class="p">(</span><span class="mi">51390</span><span class="p">)</span><span class="si">}</span><span class="s2"> percent.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.56 percent.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The dollar at infinity will be worth <code class="docutils literal notranslate"><span class="pre">0.55</span></code> <em>net</em> dollars. Its premium is zero since, at infinity, the marginal dollar value will coincide with the average value. Hence, continuing along the income level (<span class="math notranslate nohighlight">\(x\)</span>-axis) to infinity, the premium on the marginal dollar limits to zero.</p>
+</div>
+</div>
+<div class="section" id="toward-applications">
+<h2>Toward applications<a class="headerlink" href="#toward-applications" title="Permalink to this headline">¶</a></h2>
+<p>This article began with the question of whether an income earner should forgo a pay rise. There is no reason to do so since, on <em>net</em> dollars, they will always be earning more. A more interesting question is whether it is <em>worth</em> working for a pay rise. Marginal analysis is tailored toward address questions such as these.</p>
+<p>For a given income level <span class="math notranslate nohighlight">\(x\)</span>, suppose <span class="math notranslate nohighlight">\(E(x)\)</span> is the total amount of “effort” expended in earning <span class="math notranslate nohighlight">\(x\)</span>. The unitised effort, <span class="math notranslate nohighlight">\(E_x\)</span>, is then</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+E_x
+=
+\frac{E(x)}{x}.
+\end{align}
+\]</div>
+<p>Comparing unitised effort with the marginal value and average return given a basis on which to decide whether to working for a pay rise.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>To see that a pay rise should <em>always</em> be accepted if it comes for free, suppose the income earner earns <span class="math notranslate nohighlight">\(x\)</span> amount. The total effort expended in earning <span class="math notranslate nohighlight">\(x\)</span> is <span class="math notranslate nohighlight">\(E(x)\)</span>. With a pay rise of <span class="math notranslate nohighlight">\(y\)</span> amount, the earner earns a new income of <span class="math notranslate nohighlight">\(x + y\)</span>. If it came for free, then <span class="math notranslate nohighlight">\(E(x + y) = E(x)\)</span>. Hence, effort expended <em>per dollar</em> is</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+E_{x+ y} 
+=
+\frac{E(x + y)}{x + y}
+=
+\frac{E(x)}{x + y} 
+&lt; 
+\frac{E(x)}{x}
+=
+E_x.
+\end{align}
+\]</div>
+<p>As <span class="math notranslate nohighlight">\(E_{x + y} &lt; E_x\)</span>, see that the income earner will earn a greater income with <em>less</em> average effort expended. Hence, they should accept the pay rise if it is free.</p>
+</div>
+<div class="section" id="decision-basis-criteria">
+<h3>Decision basis criteria<a class="headerlink" href="#decision-basis-criteria" title="Permalink to this headline">¶</a></h3>
+<p>The previous example of the free pay rise illustrates an important, general principle:</p>
+<p><em>if the average effort per dollar decreases with an increase in income, it is worth working for the extra dollar(s) in the income increase.</em></p>
+<p>Other important factors to employ in making a decision are comparisons with the marginal and average value. There are two criteria identified here which an income earner can use to decide whether an extra dollar of income is worth earning.</p>
+<div class="admonition-strong-criterion admonition">
+<p class="admonition-title">Strong criterion</p>
+<p>On an income <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(E_x &lt; \mathfrak m_x\)</span>, then the <span class="math notranslate nohighlight">\(x\)</span>-th dollar is worth the effort to earn it;</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(E_x &gt; \alpha_x\)</span>, the <span class="math notranslate nohighlight">\(x\)</span>-th dollar is <em>not</em> worth the effort.</p></li>
+</ul>
+</div>
+<p>In Australia’s progressive taxation system we know that <span class="math notranslate nohighlight">\(\mathfrak m_x \leq \alpha_x\)</span> for all incomes <span class="math notranslate nohighlight">\(x\)</span>. Under the Strong Criterion, it <em>not</em> suffient for the average effort in earning income <span class="math notranslate nohighlight">\(E_x\)</span> to be less than the average return on the dollar. It must be less than the <em>marginal value</em> <span class="math notranslate nohighlight">\(\mathfrak m_x\)</span>.</p>
+<p>A weaker criterion is the following, based only on the premium.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Weak Criterion is equivalent to the Strong criterion for incomes <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(\mathfrak m_x = \alpha_x\)</span>.</p>
+</div>
+<p>With the above two criteria, see that there are two types of <em>optimal</em> incomes that an income earner ought to vie for. These the Strong Optimal Income and Weak Optimal Income defined below.</p>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>The <strong>Strong Optimal Income</strong> is the income <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(E_x = \alpha_x\)</span>. The <strong>Weak Optimal Income</strong> is the income <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(E_x = \mathfrak m_x\)</span>.</p>
+</div>
+<p>At any Strong Optimal Income, it is worth earning the <span class="math notranslate nohighlight">\(x\)</span>-th dollar in the Weak Criterion. At any Weak Optimal Income, it is not necessarily true the <span class="math notranslate nohighlight">\(x\)</span>-th dollar is worth earning according to the Strong Criterion.</p>
+</div>
+<div class="section" id="effort-components">
+<h3>Effort components<a class="headerlink" href="#effort-components" title="Permalink to this headline">¶</a></h3>
+<p>If the effort per dollar <span class="math notranslate nohighlight">\(E_x\)</span> at any income <span class="math notranslate nohighlight">\(x\)</span> is known, then the criteria listed above can be readily applied and a decision on whether to earn the <span class="math notranslate nohighlight">\(x\)</span>-th dollar is straightforward. Much difficulty lies therefore in understanding what comprises <span class="math notranslate nohighlight">\(E_x\)</span>.</p>
+<p>The construction of <span class="math notranslate nohighlight">\(E_x\)</span> for all <span class="math notranslate nohighlight">\(x\)</span> can be highly varied and person-specific. There are nevertheless some generic features one can identify that are reasonably applicable to all people. Two of these are:</p>
+<ul class="simple">
+<li><p>the expenses involved in generating the income <span class="math notranslate nohighlight">\(x\)</span>;</p></li>
+<li><p>expenses expected to be covered over a time frame in the future.</p></li>
+</ul>
+<p>Let <span class="math notranslate nohighlight">\(\epsilon_x\)</span> denote the averaged expense on earning a <em>net</em> dollar of income under <span class="math notranslate nohighlight">\(x\)</span>. This is the first of the two components above. The difference <span class="math notranslate nohighlight">\(E_x - \epsilon_x\)</span> is the “excess”, to be understood analogously to <em>net profit</em>. Classically, what is the purpose of net profit? From the viewpoint of corporations, net profit can be understood as defining a company’s <em>going concern</em> for a period of time in the future.</p>
+<p>The expenses <span class="math notranslate nohighlight">\(\epsilon_x\)</span> are easier to estimate or record both for an individual or corporation. A person or corporation’s going concern is however more subjective. Determining this allows for getting a more informed  answer as to whether it is worth the effort to earn the <span class="math notranslate nohighlight">\(x\)</span>-th dollar.</p>
+<p>– Kowshik Bettadapura</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
